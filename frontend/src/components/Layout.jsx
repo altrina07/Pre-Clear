@@ -46,7 +46,6 @@ export function Layout({ children, userRole, currentPage, onNavigate, onLogout }
   const adminNav = [
     { id: 'dashboard', label: 'Admin Dashboard', icon: LayoutDashboard },
     { id: 'user-management', label: 'User Management', icon: Users },
-    { id: 'import-export-rules', label: 'Import/Export Rules', icon: Shield },
     { id: 'approval-logs', label: 'Approval Logs', icon: FileSearch },
     { id: 'tracking', label: 'Shipment Tracking', icon: MapPin },
   ];

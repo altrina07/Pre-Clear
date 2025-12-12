@@ -42,7 +42,6 @@ import { SystemConfig } from "./components/admin/SystemConfig";
 import { AIRulesMonitoring } from "./components/admin/AIRulesMonitoring";
 import { ApprovalLogs } from "./components/admin/ApprovalLogs";
 import { ShipmentTracking } from "./components/admin/ShipmentTracking";
-import { ImportExportRules } from "./components/admin/ImportExportRules";
 
 function AppContent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -223,8 +222,6 @@ function AppContent() {
         return <ApprovalLogs />;
       case "tracking":
         return <ShipmentTracking />;
-      case "import-export-rules":
-        return <ImportExportRules />;
       default:
         return <AdminDashboard onNavigate={handleNavigate} />;
     }

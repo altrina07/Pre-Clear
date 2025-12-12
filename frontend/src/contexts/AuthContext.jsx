@@ -1,20 +1,32 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext({
+  isLoggedIn: false,
+  userRole: '',
+  login: () => {},
+  logout: () => {},
+  setUserRole: () => {}
+});
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export function AuthProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('');
 
-  const login = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+  const login = (role) => {
+    setUserRole(role);
+    setIsLoggedIn(true);
+  };
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    setUserRole('');
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, userRole, login, logout, setUserRole }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => useContext(AuthContext);
-
-export default AuthContext;

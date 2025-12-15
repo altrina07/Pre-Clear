@@ -40,7 +40,6 @@ import { AdminDashboard } from "./components/admin/AdminDashboard";
 import { UserManagement } from "./components/admin/UserManagement";
 import { SystemConfig } from "./components/admin/SystemConfig";
 import { AIRulesMonitoring } from "./components/admin/AIRulesMonitoring";
-import { ApprovalLogs } from "./components/admin/ApprovalLogs";
 import { ShipmentTracking } from "./components/admin/ShipmentTracking";
 
 function AppContent() {
@@ -218,8 +217,6 @@ function AppContent() {
         return <SystemConfig />;
       case "ai-monitoring":
         return <AIRulesMonitoring />;
-      case "approval-logs":
-        return <ApprovalLogs />;
       case "tracking":
         return <ShipmentTracking />;
       default:

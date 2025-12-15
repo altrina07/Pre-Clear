@@ -51,7 +51,7 @@ export function LoginPage({ onLogin, onNavigate }) {
     },
     {
       id: "admin",
-      name: "Admin / UPS Operations",
+      name: "Admin",
       icon: Settings,
       description: "Manage users, monitor AI, and view system analytics",
     },
@@ -78,7 +78,7 @@ export function LoginPage({ onLogin, onNavigate }) {
           </div>
 
           <h1 className="text-4xl mb-3 font-semibold" style={{ color: "#2F1B17" }}>
-            Welcome to UPS Pre-Clear
+            Welcome to Pre-Clear
           </h1>
           <p className="text-lg" style={{ color: "#7A5B52" }}>
             Select your role and sign in to continue

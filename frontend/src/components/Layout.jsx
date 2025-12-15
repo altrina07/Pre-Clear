@@ -46,7 +46,6 @@ export function Layout({ children, userRole, currentPage, onNavigate, onLogout }
   const adminNav = [
     { id: 'dashboard', label: 'Admin Dashboard', icon: LayoutDashboard },
     { id: 'user-management', label: 'User Management', icon: Users },
-    { id: 'approval-logs', label: 'Approval Logs', icon: FileSearch },
     { id: 'tracking', label: 'Shipment Tracking', icon: MapPin },
   ];
 
@@ -60,7 +59,7 @@ export function Layout({ children, userRole, currentPage, onNavigate, onLogout }
   const getRoleName = () => {
     if (userRole === 'shipper') return 'Shipper';
     if (userRole === 'broker') return 'Customs Broker';
-    if (userRole === 'admin') return 'Admin / UPS Operations';
+    if (userRole === 'admin') return 'Admin';
     return 'User';
   };
 

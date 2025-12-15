@@ -41,7 +41,7 @@ export function CreateShipment({ onNavigate, onSave }) {
       if (product.name && product.name.length > 3) {
         setLoadingSuggestions(prev => ({ ...prev, [product.id]: true }));
         try {
-          const suggestions = await suggestHSCode(product.name, product.description);
+          const suggestions = await suggestHSCode(product.name, product.description, product.category || '');
           setHsCodeSuggestions(prev => ({ ...prev, [product.id]: suggestions }));
         } catch (error) {
           console.error('Error fetching HS code suggestions:', error);

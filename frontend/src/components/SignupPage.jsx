@@ -106,7 +106,7 @@ export function SignupPage({ onNavigate }) {
     },
     {
       id: 'admin',
-      name: 'Admin / UPS Operations',
+      name: 'Admin',
       icon: Settings,
       description: 'Manage users, monitor AI, and view system analytics'
     }

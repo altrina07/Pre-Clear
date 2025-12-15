@@ -102,75 +102,7 @@ export function AdminDashboard({ onNavigate }) {
         </div>
       </div>
 
-      {/* All Shipments Table */}
-      <div className="mb-8">
-        <div className="mb-4">
-          <h2 className="text-slate-900 text-xl font-semibold">All Shipments Overview</h2>
-          <p className="text-slate-600">Complete list of all shipments and their current status</p>
-        </div>
 
-        <div className="bg-white rounded-xl overflow-hidden" style={{ border: '2px solid #3A2B28' }}>
-          <table className="w-full">
-            <thead>
-              <tr style={{ background: '#D4AFA0' }}>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '12%' }}>Shipment ID</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '20%' }}>Route</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '15%' }}>Shipper</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '12%' }}>Value</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '15%' }}>AI Status</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '15%' }}>Broker Status</th>
-                <th className="text-left py-4 px-6 font-semibold" style={{ color: '#2F1B17', width: '11%' }}>Payment</th>
-              </tr>
-            </thead>
-            <tbody>
-              {shipments.map((shipment) => {
-                const currencyCode = shipment.currency || 'USD';
-                const currencySymbol = { USD: '$', EUR: '€', GBP: '£', JPY: '¥', CAD: 'C$', INR: '₹', CNY: '¥', AUD: 'A$' }[currencyCode] || currencyCode;
-
-                return (
-                  <tr key={shipment.id} className="border-b hover:bg-slate-50" style={{ borderColor: '#E6B6A0' }}>
-                    <td className="py-4 px-6 text-slate-900 font-medium">#{shipment.id}</td>
-                    <td className="py-4 px-6 text-slate-700 text-sm">
-                      {shipment.shipper?.city || 'N/A'}, {shipment.shipper?.country || ''} → {shipment.consignee?.city || 'N/A'}, {shipment.consignee?.country || ''}
-                    </td>
-                    <td className="py-4 px-6 text-slate-700">{shipment.shipper?.company || shipment.shipperName || 'N/A'}</td>
-                    <td className="py-4 px-6 text-slate-700">{currencySymbol}{parseFloat(shipment.value).toLocaleString()} {currencyCode}</td>
-                    <td className="py-4 px-6">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        shipment.aiApproval === 'approved' ? 'bg-green-100 text-green-700' :
-                        shipment.aiApproval === 'rejected' ? 'bg-red-100 text-red-700' :
-                        'bg-yellow-100 text-yellow-700'
-                      }`}>
-                        {shipment.aiApproval === 'approved' ? 'Approved' :
-                         shipment.aiApproval === 'rejected' ? 'Rejected' : 'Pending'}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        shipment.brokerApproval === 'approved' ? 'bg-green-100 text-green-700' :
-                        shipment.brokerApproval === 'documents-requested' ? 'bg-blue-100 text-blue-700' :
-                        shipment.brokerApproval === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-slate-100 text-slate-700'
-                      }`}>
-                        {shipment.brokerApproval === 'approved' ? 'Approved' :
-                         shipment.brokerApproval === 'documents-requested' ? 'Docs Req' :
-                         shipment.brokerApproval === 'pending' ? 'Pending' : 'Not Started'}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        shipment.paymentStatus === 'completed' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}>
-                        {shipment.paymentStatus === 'completed' ? 'Paid' : 'Pending'}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
 
       {/* Shipping Insights */}
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">

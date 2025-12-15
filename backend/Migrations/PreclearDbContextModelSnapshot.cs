@@ -728,9 +728,26 @@ namespace backend.Migrations
                         .HasColumnType("varchar(2000)")
                         .HasColumnName("file_url");
 
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("name");
+
+                    b.Property<bool>("Required")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("required");
+
                     b.Property<long>("ShipmentId")
                         .HasColumnType("bigint")
                         .HasColumnName("shipment_id");
+
+                    b.Property<bool>("Uploaded")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("uploaded");
 
                     b.Property<DateTime>("UploadedAt")
                         .ValueGeneratedOnAdd()

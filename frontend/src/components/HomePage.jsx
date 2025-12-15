@@ -247,7 +247,7 @@ export function HomePage({ onLogin, onSignup }) {
             <Truck className="w-10 h-10 text-red-400 mb-4" style={{ color: "#E6B800" }} />
             <h3 className="text-white mb-2" style={{ color: "#2F1B17" }}>Integrated Booking</h3>
             <p className="text-slate-400 text-sm" style={{ color: "#7A5B52" }}>
-              Book shipments directly with UPS using your pre-clear token
+              Book shipments directly using your pre-clear token
             </p>
           </div>
 

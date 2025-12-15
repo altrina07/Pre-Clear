@@ -248,9 +248,12 @@ namespace PreClear.Api.Data
                 entity.Property(d => d.Id).HasColumnName("id");
                 entity.Property(d => d.ShipmentId).HasColumnName("shipment_id");
                 entity.Property(d => d.DocumentType).HasColumnName("document_type").HasConversion<string>().HasMaxLength(50).HasDefaultValue(DocumentType.Other);
+                entity.Property(d => d.Name).HasColumnName("name").HasMaxLength(255);
                 entity.Property(d => d.FileUrl).HasColumnName("file_url").HasMaxLength(2000);
                 entity.Property(d => d.UploadedBy).HasColumnName("uploaded_by");
                 entity.Property(d => d.VerifiedByBroker).HasColumnName("verified_by_broker").HasDefaultValue(false);
+                entity.Property(d => d.Required).HasColumnName("required").HasDefaultValue(false);
+                entity.Property(d => d.Uploaded).HasColumnName("uploaded").HasDefaultValue(false);
                 entity.Property(d => d.UploadedAt).HasColumnName("uploaded_at").HasColumnType("datetime(3)").HasDefaultValueSql("CURRENT_TIMESTAMP(3)");
                 entity.Property(d => d.Version).HasColumnName("version").HasDefaultValue(1);
 

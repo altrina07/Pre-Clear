@@ -155,88 +155,22 @@ export function formatCurrency(amount, currency = 'USD') {
 }
 
 // HS Code suggestions based on product name/description
-export async function suggestHSCode(productName, productDescription) {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 600));
-
-  const combinedText = `${productName} ${productDescription || ''}`.toLowerCase();
-  const suggestions = [];
-
-  // Electronics
-  if (combinedText.includes('electronic') || combinedText.includes('circuit') || combinedText.includes('semiconductor')) {
-    suggestions.push({
-      code: '8541.10.00',
-      description: 'Electronic integrated circuits and microassemblies',
-      status: 'valid',
-      requiredDocs: ['Commercial Invoice', 'Packing List', 'FCC Declaration', 'Certificate of Origin'],
-      restrictions: ['Requires FCC certification', 'RoHS compliance required']
+export async function suggestHSCode(productName, productDescription, category) {
+  // Call backend HS suggestion endpoint
+  try {
+    const resp = await fetch('/api/ai/hs/suggest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: productName || '', category: category || '', description: productDescription || '', k: 5 })
     });
+    if (!resp.ok) return [];
+    const body = await resp.json();
+    const items = (body.suggestions || []).map(s => ({ code: s.hscode || s.code, description: s.description || '', score: s.score || 0 }));
+    return items;
+  } catch (err) {
+    console.error('HS suggest call failed', err);
+    return [];
   }
-
-  // Textiles
-  if (combinedText.includes('textile') || combinedText.includes('fabric') || combinedText.includes('cotton')) {
-    suggestions.push({
-      code: '5208.31.00',
-      description: 'Cotton fabrics, woven, dyed',
-      status: 'valid',
-      requiredDocs: ['Commercial Invoice', 'Packing List', 'Certificate of Origin', 'Textile Declaration']
-    });
-  }
-
-  // Medical Devices
-  if (combinedText.includes('medical') || combinedText.includes('diagnostic') || combinedText.includes('surgical')) {
-    suggestions.push({
-      code: '9018.19.00',
-      description: 'Medical, surgical or laboratory instruments',
-      status: 'restricted',
-      requiredDocs: ['Commercial Invoice', 'Packing List', 'FDA Registration', 'ISO Certificate', 'Safety Data Sheet'],
-      restrictions: ['FDA approval required', 'ISO 13485 certification', 'Biocompatibility testing']
-    });
-  }
-
-  // Machinery
-  if (combinedText.includes('machine') || combinedText.includes('cnc') || combinedText.includes('milling')) {
-    suggestions.push({
-      code: '8459.10.00',
-      description: 'CNC machine tools for drilling, boring, milling',
-      status: 'valid',
-      requiredDocs: ['Commercial Invoice', 'Packing List', 'Safety Certificate', 'Technical Specifications'],
-      restrictions: ['OSHA compliance required', 'Safety certification']
-    });
-  }
-
-  // Pharmaceuticals (Banned without proper licenses)
-  if (combinedText.includes('pharmaceutical') || combinedText.includes('drug') || combinedText.includes('medicine')) {
-    suggestions.push({
-      code: '3004.90.00',
-      description: 'Pharmaceutical products',
-      status: 'banned',
-      requiredDocs: ['FDA Import License', 'Drug Registration Certificate', 'Good Manufacturing Practice Certificate'],
-      restrictions: ['FDA approval mandatory', 'Controlled substance - restricted without license', 'Requires special import permit']
-    });
-  }
-
-  // Weapons/Restricted items
-  if (combinedText.includes('weapon') || combinedText.includes('firearm') || combinedText.includes('ammunition')) {
-    suggestions.push({
-      code: '9301.00.00',
-      description: 'Military weapons (excluding revolvers, pistols)',
-      status: 'banned',
-      restrictions: ['Strictly prohibited without special government license', 'Export/Import license required', 'ATF approval mandatory']
-    });
-  }
-
-  // Default fallback if no match
-  if (suggestions.length === 0) {
-    suggestions.push({
-      code: '9999.99.99',
-      description: 'No matching HS code found - please select manually',
-      status: 'valid',
-      requiredDocs: ['Commercial Invoice', 'Packing List']
-    });
-  }
-
-  return suggestions;
 }
 
 // Validate HS code and get status

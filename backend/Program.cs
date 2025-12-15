@@ -58,6 +58,9 @@ if (!string.IsNullOrWhiteSpace(effectiveConn))
 // CORS (dev)
 builder.Services.AddCors(p => p.AddDefaultPolicy(q => q.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
+// HttpClient factory for AI service outgoing calls
+builder.Services.AddHttpClient();
+
 var app = builder.Build();
 
 // Apply migrations automatically in Development only

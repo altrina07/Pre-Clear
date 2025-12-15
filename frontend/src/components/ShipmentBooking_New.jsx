@@ -898,12 +898,7 @@ export function ShipmentBooking_New({ shipment, onNavigate }) {
                 checked={formData.documents?.sds || false}
                 onChange={(e) => handleNestedChange('documents', 'sds', e.target.checked)}
               />
-              <CheckboxField
-                label="Airway Bill (AWB)"
-                name="awb"
-                checked={formData.documents?.awb || false}
-                onChange={(e) => handleNestedChange('documents', 'awb', e.target.checked)}
-              />
+              {/* Airway Bill (AWB) removed — AWB is not provided as a static document option */}
               <CheckboxField
                 label="Bill of Lading (BOL)"
                 name="bol"
